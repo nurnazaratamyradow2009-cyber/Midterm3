@@ -1,0 +1,29 @@
+:root {
+    --pagination-accent: #198754;
+}
+
+.pagination .page-link {
+    color: var(--pagination-accent);
+}
+
+.pagination .page-item.active .page-link {
+    background-color: var(--pagination-accent);
+    border-color: var(--pagination-accent);
+    color: #fff;
+}
+
+.pagination .page-link:hover {
+    background-color: color-mix(in srgb, var(--pagination-accent) 14%, white);
+    border-color: var(--pagination-accent);
+    color: var(--pagination-accent);
+}
+
+.pagination .page-item.disabled .page-link {
+    color: var(--pagination-accent);
+    opacity: 0.45;
+}
+
+
+.dropdown-item.active, .dropdown-item:active {
+    background-color: #198754;
+}
