@@ -2,8 +2,10 @@
 
 @section('main-content')
     <div class="container py-5">
-        <div class="h1 text-center">Phones:</div>
-
+        <div class="d-flex align-items-center justify-content-between">
+            <div class="h1 text-center">Phones:</div>
+            <a class="btn btn-success px-3 text-light" href="{{ route('admin.phone.create') }}">Add Phone</a>
+        </div>
         <div class="my-5">
             <div class="row">
                 @foreach ($phones as $phone)

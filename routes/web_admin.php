@@ -12,6 +12,7 @@ Route::middleware('auth')
     ->group(function () {
         Route::get('/admin', [DashboardController::class, 'index'])->name('admin.dashboard');
 
+        Route::post('phone/store', [PhoneController::class, 'store'])->name('phone.store');
         Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     });
 
@@ -25,22 +26,23 @@ Route::get('locale/{locale}', [HomeController::class, 'locale'])
     ->name('locale')->where('locale', '[a-z]+');
 
 // Protect all admin routes behind the auth middleware
-Route::prefix('admin')->as('admin.')->middleware(['auth'])->group(function () {
+Route::prefix('admin/')->as('admin.')->middleware(['auth'])->group(function () {
 
 
     // Dashboard
-    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('', [DashboardController::class, 'index'])->name('dashboard');
 
     // Phone
-    Route::get('/phones', [PhoneController::class, 'phones'])->name('phone');
-    Route::get('/phone/show/{id}', [PhoneController::class, 'phoneShow'])->name('phone.show');
-    Route::delete('/phone/{id}', [PhoneController::class, 'destroy'])->name('phone.destroy');
-    Route::get('/phone/edit/{id}', [PhoneController::class, 'edit'])->name('phone.edit');
-    Route::put('/phone/{id}', [PhoneController::class, 'update'])->name('phone.update');
+    Route::get('phones', [PhoneController::class, 'phones'])->name('phone');
+    Route::get('phone/show/{id}', [PhoneController::class, 'phoneShow'])->name('phone.show');
+    Route::delete('phone/{id}', [PhoneController::class, 'destroy'])->name('phone.destroy');
+    Route::get('phone/edit/{id}', [PhoneController::class, 'edit'])->name('phone.edit');
+    Route::put('phone/{id}', [PhoneController::class, 'update'])->name('phone.update');
+    Route::get('phone/create', [PhoneController::class, 'create'])->name('phone.create');
 
     // Brand
-    Route::get('/brands', [BrandController::class, 'brands'])->name('brand');
+    Route::get('brands', [BrandController::class, 'brands'])->name('brand');
 
     // Category
-    Route::get('/categories', [CategoryController::class, 'categories'])->name('category');
+    Route::get('categories', [CategoryController::class, 'categories'])->name('category');
 });

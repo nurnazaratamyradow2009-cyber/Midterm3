@@ -103,6 +103,15 @@
                     <form action="{{ route('admin.phone.update', $phone->id) }}" method="POST">
                         @csrf
                         @method('PUT')
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul class="mb-0">
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
 
                         <!-- General Information Section -->
                         <div class="section-title section-divider"><i class="bi bi-info-circle me-2"></i>{{ __('app.admin.general_information') }}</div>
