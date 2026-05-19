@@ -115,9 +115,20 @@
                                 <label class="form-label">Brand</label>
                                 <select name="brand_id" class="form-select" required>
                                     <option value="">-- Select a Brand --</option>
-                                    @foreach($brands ?? [] as $brand)
+                                    @foreach($brands as $brand)
                                         <option value="{{ $brand->id }}" {{ old('brand_id', $phone->brand_id) == $brand->id ? 'selected' : '' }}>
                                             {{ $brand->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <label class="form-label">Category</label>
+                                <select name="category_id" class="form-select" required>
+                                    <option value="">-- Select a Category --</option>
+                                    @foreach($categories as $category)
+                                        <option value="{{ $category->id }}" {{ old('category_id', $phone->category_id) == $category->id ? 'selected' : '' }}>
+                                            {{ $category->name }}
                                         </option>
                                     @endforeach
                                 </select>

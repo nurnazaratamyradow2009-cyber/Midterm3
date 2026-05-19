@@ -97,7 +97,7 @@
                         <button type="submit" class="btn btn-danger">Delete Phone</button>
 
                     </form>
-                    <a href="{{ route('admin.phones.edit', $phone->id) }}" class="btn btn-warning">
+                    <a href="{{ route('admin.phone.edit', $phone->id) }}" class="btn btn-warning">
                         Edit Phone Specs
                     </a>
                 </div>

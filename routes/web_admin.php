@@ -33,9 +33,9 @@ Route::prefix('admin')->as('admin.')->middleware(['auth'])->group(function () {
 
     // Phone
     Route::get('/phones', [PhoneController::class, 'phones'])->name('phone');
-    Route::get('/phone/{id}', [PhoneController::class, 'phoneShow'])->name('phone.show');
+    Route::get('/phone/show/{id}', [PhoneController::class, 'phoneShow'])->name('phone.show');
     Route::delete('/phone/{id}', [PhoneController::class, 'destroy'])->name('phone.destroy');
-    Route::get('/phone/{id}', [PhoneController::class, 'edit'])->name('phone.edit');
+    Route::get('/phone/edit/{id}', [PhoneController::class, 'edit'])->name('phone.edit');
     Route::put('/phone/{id}', [PhoneController::class, 'update'])->name('phone.update');
 
     // Brand

@@ -30,12 +30,14 @@ class PhoneController extends Controller
         $brands = Brand::all(); // Get all brands for the dropdown
         $categories = Category::all(); // Get all brands for the dropdown
         $phone = Phone::findOrFail($id); // Get all brands for the dropdown
-        return view('admin.phones.edit', compact('phone', 'brands'));
+        return view('admin.phones.edit', compact('phone', 'brands', 'categories'));
     }
     public function update(Request $request, $id)
-    {   $phone = Phone::findOrFail($id);
+    {   
+        $phone = Phone::findOrFail($id);
         
         $request->validate([
+            'model'            => 'required|string',
             'brand_id'         => 'required|exists:brands,id',
             'category_id'      => 'required|exists:categories,id',
             'announced_year'   => 'nullable|integer',
@@ -44,38 +46,36 @@ class PhoneController extends Controller
             'storage_version'  => 'nullable|string',
             'ram'              => 'nullable|string',
             'ram_version'      => 'nullable|string',
+            'is_support_micro_sd' => 'nullable|boolean',
+            'first_camera_sensor_MP_value' => 'nullable|numeric',
+            'first_camera'     => 'nullable|string',
+            'screen_type'      => 'nullable|string',
+            'battery_capacity' => 'nullable|string',
+            'charging_speed'   => 'nullable|string',
         ]);
 
-        // Update the phone attributes with request data
+        // Get the brand name from the brand_id
+        $brand = Brand::findOrFail($request->brand_id);
+
+        // Update all phone attributes in one call
         $phone->update([
-            'brand_id'         => $request->brand_id,
-            'category_id'      => $request->category_id,
-            'announced_year'   => $request->announced_year,
-            'produced_year'    => $request->produced_year,
-            'storage'          => $request->storage,
-            'storage_version'  => $request->storage_version,
-            'ram'              => $request->ram,
-            'ram_version'      => $request->ram_version,
+            'model'                         => $request->model,
+            'brand_id'                      => $request->brand_id,
+            'brand'                         => $brand->name,
+            'category_id'                   => $request->category_id,
+            'announced_year'                => $request->announced_year,
+            'produced_year'                 => $request->produced_year,
+            'storage'                       => $request->storage,
+            'storage_version'               => $request->storage_version,
+            'ram'                           => $request->ram,
+            'ram_version'                   => $request->ram_version,
+            'is_support_micro_sd'           => $request->has('is_support_micro_sd'),
+            'first_camera_sensor_MP_value'  => $request->first_camera_sensor_MP_value,
+            'first_camera'                  => $request->first_camera,
+            'screen_type'                   => $request->screen_type,
+            'battery_capacity'              => $request->battery_capacity,
+            'charging_speed'                => $request->charging_speed,
         ]);
-
-        // General & Performance
-        $phone->model = $request->model;
-        $phone->brand_id = $request->brand_id;
-        $phone->announced_year = $request->announced_year;
-        $phone->storage = $request->storage;
-        $phone->ram = $request->ram;
-        $phone->is_support_micro_sd = $request->has('is_support_micro_sd');
-
-        // Camera
-        $phone->first_camera_sensor_MP_value = $request->first_camera_sensor_MP_value;
-        $phone->first_camera = $request->first_camera;
-
-        // Display & Battery
-        $phone->screen_type = $request->screen_type;
-        $phone->battery_capacity = $request->battery_capacity;
-        $phone->charging_speed = $request->charging_speed;
-
-        $phone->save();
 
         return redirect()->route('admin.phone')->with('success', 'Phone updated successfully');
     }
