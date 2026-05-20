@@ -45,7 +45,7 @@
                     <h1 class="fw-bold text-dark mb-1"><i class="bi bi-tags me-2 text-primary"></i>Brands</h1>
                     <p class="text-muted small mb-0">Manage manufacturer companies and connected mobile inventories.</p>
                 </div>
-                <a class="btn btn-success px-4 text-light rounded-pill shadow-sm" href="#">
+                <a class="btn btn-success px-4 text-light rounded-pill shadow-sm" href="{{ route('admin.brand.create') }}">
                     <i class="bi bi-plus-lg me-1"></i> Add Brand
                 </a>
             </div>
@@ -80,7 +80,7 @@
                             </div>
 
                             <div class="mt-4 pt-2 border-top d-flex justify-content-end gap-2">
-                                <a href="#" class="btn btn-sm btn-outline-primary px-2.5 rounded-pill"
+                                <a href="{{ route('admin.brand.show', $brand->id)}}" class="btn btn-sm btn-outline-primary px-2.5 rounded-pill"
                                     title="View catalog products">
                                     <i class="bi bi-eye"></i> View
                                 </a>
