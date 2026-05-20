@@ -12,26 +12,25 @@ Route::middleware('auth')
     ->group(function () {
         Route::get('/admin', [DashboardController::class, 'index'])->name('admin.dashboard');
 
-        Route::post('phone/store', [PhoneController::class, 'store'])->name('phone.store');
         Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-    });
-
-Route::middleware('guest')
-    ->group(function () {
-        Route::post('/login', [AuthController::class, 'login'])->middleware('throttle:5,1');
-        Route::get('/login', [AuthController::class, 'show'])->name('login');
-    });
-
-Route::get('locale/{locale}', [HomeController::class, 'locale'])
-    ->name('locale')->where('locale', '[a-z]+');
+        });
+        
+        Route::middleware('guest')
+        ->group(function () {
+            Route::post('/login', [AuthController::class, 'login'])->middleware('throttle:5,1');
+            Route::get('/login', [AuthController::class, 'show'])->name('login');
+            });
+            
+            Route::get('locale/{locale}', [HomeController::class, 'locale'])
+            ->name('locale')->where('locale', '[a-z]+');
 
 // Protect all admin routes behind the auth middleware
 Route::prefix('admin/')->as('admin.')->middleware(['auth'])->group(function () {
 
-
+    
     // Dashboard
     Route::get('', [DashboardController::class, 'index'])->name('dashboard');
-
+    
     // Phone
     Route::get('phones', [PhoneController::class, 'phones'])->name('phone');
     Route::get('phone/show/{id}', [PhoneController::class, 'phoneShow'])->name('phone.show');
@@ -39,7 +38,8 @@ Route::prefix('admin/')->as('admin.')->middleware(['auth'])->group(function () {
     Route::get('phone/edit/{id}', [PhoneController::class, 'edit'])->name('phone.edit');
     Route::put('phone/{id}', [PhoneController::class, 'update'])->name('phone.update');
     Route::get('phone/create', [PhoneController::class, 'create'])->name('phone.create');
-
+    Route::post('phone/store', [PhoneController::class, 'store'])->name('phone.store');
+    
     // Brand
     Route::get('brands', [BrandController::class, 'brands'])->name('brand');
 

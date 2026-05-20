@@ -7,21 +7,24 @@ use Illuminate\Database\Eloquent\Model;
 class Phone extends Model
 {
     protected $fillable = [
-        'model',
         'brand_id',
-        'brand',
         'category_id',
-        'announced_year',
-        'produced_year',
-        'storage',
-        'storage_version',
-        'ram',
-        'ram_version',
-        'is_support_micro_sd',
-        'first_camera_sensor_MP_value',
-        'first_camera',
-        'screen_type',
-        'battery_capacity',
-        'charging_speed',
+        'model',
+        'brand',
+        'processor',
+        'screen_refresh_rate',
+        'back_camera_count',
+        'front_camera_count',
+
+        // Rear Cameras
+        'first_camera_mp',
+        'second_camera_mp',
+        'third_camera_mp',
+        'fourth_camera_mp',
+        'fifth_camera_mp',
+
+        // Front Cameras
+        'first_front_camera_mp',
+        'second_front_camera_mp',
     ];
 }
