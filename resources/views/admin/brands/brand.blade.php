@@ -80,12 +80,12 @@
                             </div>
 
                             <div class="mt-4 pt-2 border-top d-flex justify-content-end gap-2">
-                                <a href="{{ route('admin.brand.show', $brand->id)}}" class="btn btn-sm btn-outline-primary px-2.5 rounded-pill"
-                                    title="View catalog products">
+                                <a href="{{ route('admin.brand.show', $brand->id)}}"
+                                    class="btn btn-sm btn-outline-primary px-2.5 rounded-pill" title="View catalog products">
                                     <i class="bi bi-eye"></i> View
                                 </a>
-                                <a href="#" class="btn btn-sm btn-outline-secondary px-2.5 rounded-pill"
-                                    title="Edit specifications name">
+                                <a href="{{ route('admin.brand.edit', $brand->id) }}"
+                                    class="btn btn-sm btn-outline-secondary px-2.5 rounded-pill" title="Edit Brand Name">
                                     <i class="bi bi-pencil"></i>
                                 </a>
                             </div>

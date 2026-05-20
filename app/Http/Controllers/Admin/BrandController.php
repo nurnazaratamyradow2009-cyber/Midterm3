@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Models\Phone;
+use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class BrandController extends Controller
 {
@@ -35,16 +38,38 @@ class BrandController extends Controller
     }
 
     // Store a newly created BRAND in the database
-    public function store(\Illuminate\Http\Request $request)
+    public function store(Request $request)
     {
         $request->validate([
             'name' => 'required|string|max:255|unique:brands,name',
         ]);
 
-        \App\Models\Brand::create([
+        Brand::create([
             'name' => $request->name,
         ]);
 
         return redirect()->route('admin.brand')->with('success', 'Brand registered successfully!');
+    }
+
+
+    public function edit($id): View
+    {
+        $brand = Brand::findOrFail($id);
+        return view('admin.brands.edit', compact('brand'));
+    }
+
+    // 2. Process the update request and save changes to the database
+    public function update(Request $request, $id): RedirectResponse
+    {
+        $request->validate([
+            'name' => 'required|string|max:255|unique:brands,name,' . $id,
+        ]);
+
+        $brand = Brand::findOrFail($id);
+        $brand->update([
+            'name' => $request->name,
+        ]);
+
+        return redirect()->route('admin.brand')->with('success', 'Brand name updated successfully!');
     }
 }

@@ -51,6 +51,7 @@ Route::prefix('admin/')->as('admin.')->middleware(['auth'])->group(function () {
 
     //  2. BRAND DYNAMICS (Place wildcards underneath)
     Route::get('brand/show/{id}', [BrandController::class, 'brandShow'])->name('brand.show');
+    Route::put('brand/{id}', [BrandController::class, 'update'])->name('brand.update');
     Route::get('brand/edit/{id}', [BrandController::class, 'edit'])->name('brand.edit');
     Route::delete('brand/{id}', [BrandController::class, 'destroy'])->name('brand.destroy');
 
